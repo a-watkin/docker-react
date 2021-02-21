@@ -1,0 +1,12 @@
+sudo: required
+language: generic 
+
+services:
+  - docker
+
+before_install:
+  - docker build -t adamwatkin/docker-react -f Dockerfile.dev
+
+script:
+  # -- --coverage automatically exits when the test suit is done
+  - docker run -e CI=true USERNAME/docker-react npm run test -- --coverage
